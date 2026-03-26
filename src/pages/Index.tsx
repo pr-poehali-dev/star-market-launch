@@ -117,7 +117,7 @@ function StarsBg() {
       });
 
       // spawn falling stars every 1.8s
-      if (time - lastSpawn > 1800) {
+      if (time - lastSpawn > 900) {
         spawnFalling();
         lastSpawn = time;
       }
