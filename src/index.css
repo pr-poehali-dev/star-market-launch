@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --background: 230 35% 5%;
-    --foreground: 220 20% 95%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 93%;
 
-    --card: 230 30% 8%;
-    --card-foreground: 220 20% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 93%;
 
-    --popover: 230 30% 8%;
-    --popover-foreground: 220 20% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 93%;
 
     --primary: 45 90% 70%;
     --primary-foreground: 230 35% 5%;
@@ -19,8 +19,8 @@
     --secondary: 260 30% 20%;
     --secondary-foreground: 220 20% 95%;
 
-    --muted: 230 25% 12%;
-    --muted-foreground: 220 15% 55%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 50%;
 
     --accent: 200 80% 65%;
     --accent-foreground: 230 35% 5%;
@@ -28,8 +28,8 @@
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 230 25% 15%;
-    --input: 230 25% 12%;
+    --border: 0 0% 14%;
+    --input: 0 0% 10%;
     --ring: 45 90% 70%;
 
     --radius: 0.75rem;
@@ -59,35 +59,19 @@
   }
 }
 
-/* Stars canvas background */
+/* Minimalist background */
 .stars-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+  display: none;
 }
 
 .star-particle {
-  position: absolute;
-  border-radius: 50%;
-  background: white;
-  animation: twinkle var(--duration, 3s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
+  display: none;
 }
 
 @keyframes twinkle {
   0%,
   100% {
-    opacity: var(--min-opacity, 0.2);
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.3);
+    opacity: 0;
   }
 }
 
@@ -146,12 +130,7 @@
 @keyframes nebula-drift {
   0%,
   100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.15;
-  }
-  50% {
-    transform: scale(1.05) rotate(3deg);
-    opacity: 0.25;
+    opacity: 0;
   }
 }
 
@@ -193,22 +172,16 @@
 }
 
 .card-cosmic {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 15, 40, 0.9) 0%,
-    rgba(10, 8, 25, 0.95) 100%
-  );
-  border: 1px solid rgba(240, 192, 96, 0.15);
+  background: rgba(12, 12, 12, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(12px);
   transition: all 0.4s ease;
 }
 
 .card-cosmic:hover {
-  border-color: rgba(240, 192, 96, 0.4);
-  transform: translateY(-4px);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(240, 192, 96, 0.1);
+  border-color: rgba(240, 192, 96, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 .btn-cosmic {
@@ -268,9 +241,9 @@
 }
 
 .input-cosmic {
-  background: rgba(10, 8, 25, 0.8);
-  border: 1px solid rgba(240, 192, 96, 0.2);
-  color: rgba(220, 215, 245, 0.9);
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(230, 230, 230, 0.9);
   transition: all 0.3s ease;
 }
 
