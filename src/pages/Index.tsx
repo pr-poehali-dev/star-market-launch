@@ -66,8 +66,23 @@ function StarsBg() {
       });
     }
 
+    type FallingStar = { x: number; y: number; len: number; speed: number; a: number; delay: number; active: boolean };
+    const fallingStars: FallingStar[] = [];
+    const spawnFalling = () => {
+      fallingStars.push({
+        x: Math.random() * canvas.width * 1.3,
+        y: -120,
+        len: Math.random() * 80 + 60,
+        speed: Math.random() * 6 + 5,
+        a: 1,
+        delay: 0,
+        active: true,
+      });
+    };
+    let lastSpawn = 0;
+
     let raf: number;
-    const draw = () => {
+    const draw = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // nebula blobs
@@ -101,9 +116,49 @@ function StarsBg() {
         ctx.fill();
       });
 
+      // spawn falling stars every 1.8s
+      if (time - lastSpawn > 1800) {
+        spawnFalling();
+        lastSpawn = time;
+      }
+
+      // draw falling stars
+      for (let i = fallingStars.length - 1; i >= 0; i--) {
+        const fs = fallingStars[i];
+        fs.x += fs.speed * 0.6;
+        fs.y += fs.speed;
+        fs.a -= 0.012;
+
+        if (fs.a <= 0 || fs.y > canvas.height + 50) {
+          fallingStars.splice(i, 1);
+          continue;
+        }
+
+        const tailX = fs.x - fs.len * 0.6;
+        const tailY = fs.y - fs.len;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, fs.x, fs.y);
+        grad.addColorStop(0, `rgba(240,192,96,0)`);
+        grad.addColorStop(0.5, `rgba(255,255,220,${fs.a * 0.5})`);
+        grad.addColorStop(1, `rgba(255,255,255,${fs.a})`);
+
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(fs.x, fs.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // bright head
+        ctx.beginPath();
+        ctx.arc(fs.x, fs.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,220,${fs.a})`;
+        ctx.fill();
+      }
+
       raf = requestAnimationFrame(draw);
     };
-    draw();
+    draw(0);
 
     return () => {
       cancelAnimationFrame(raf);
