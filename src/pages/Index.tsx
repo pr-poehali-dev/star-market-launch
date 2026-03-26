@@ -487,16 +487,10 @@ export default function Index() {
           {/* Карта для оплаты */}
           {(selected || customPrice) && (
             <div className="mb-5 rounded-2xl p-5" style={{ background: "rgba(240,192,96,0.07)", border: "1px solid rgba(240,192,96,0.2)" }}>
-              <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "rgba(240,192,96,0.6)" }}>
-                Переведи оплату на карту
-              </p>
-              <div className="flex items-center justify-between gap-3 flex-wrap">
-                <div>
-                  <div className="font-mono text-lg font-semibold tracking-widest" style={{ color: "#f5ecd4" }}>
-                    2200 7021 3849 1381
-                  </div>
-                  <div className="text-xs mt-1" style={{ color: "rgba(160,150,200,0.6)" }}>Данил П.</div>
-                </div>
+              <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
+                <p className="text-xs uppercase tracking-widest" style={{ color: "rgba(240,192,96,0.6)" }}>
+                  Выбери способ оплаты
+                </p>
                 <div className="text-right">
                   <div className="text-2xl font-semibold" style={{ color: "#f0c060" }}>
                     {selected?.price ?? customPrice}₽
@@ -504,15 +498,44 @@ export default function Index() {
                   <div className="text-xs" style={{ color: "rgba(160,150,200,0.5)" }}>сумма к оплате</div>
                 </div>
               </div>
+
+              {/* Карта */}
+              <div className="mb-3 p-3 rounded-xl" style={{ background: "rgba(10,8,25,0.5)", border: "1px solid rgba(240,192,96,0.15)" }}>
+                <div className="text-xs mb-1" style={{ color: "rgba(160,150,200,0.5)" }}>💳 По номеру карты</div>
+                <div className="font-mono text-base font-semibold tracking-widest" style={{ color: "#f5ecd4" }}>
+                  2200 7021 3849 1381
+                </div>
+                <div className="text-xs mt-0.5" style={{ color: "rgba(160,150,200,0.5)" }}>Данил П.</div>
+              </div>
+
+              {/* СБП */}
+              <div className="mb-3 p-3 rounded-xl" style={{ background: "rgba(10,8,25,0.5)", border: "1px solid rgba(240,192,96,0.15)" }}>
+                <div className="text-xs mb-1" style={{ color: "rgba(160,150,200,0.5)" }}>⚡ СБП (Система быстрых платежей)</div>
+                <div className="font-mono text-base font-semibold tracking-widest" style={{ color: "#f5ecd4" }}>
+                  8 911 547-96-20
+                </div>
+                <div className="text-xs mt-0.5" style={{ color: "rgba(160,150,200,0.5)" }}>Данил П.</div>
+              </div>
+
               <button
                 onClick={() => {
                   navigator.clipboard.writeText("2200702138491381");
                 }}
-                className="mt-3 flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg transition-all hover:opacity-80"
+                className="mt-1 flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg transition-all hover:opacity-80"
                 style={{ background: "rgba(240,192,96,0.15)", color: "rgba(240,192,96,0.9)" }}
               >
                 <Icon name="Copy" size={13} />
                 Скопировать номер карты
+              </button>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("89115479620");
+                }}
+                className="mt-2 flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg transition-all hover:opacity-80"
+                style={{ background: "rgba(240,192,96,0.15)", color: "rgba(240,192,96,0.9)" }}
+              >
+                <Icon name="Copy" size={13} />
+                Скопировать номер СБП
               </button>
             </div>
           )}
