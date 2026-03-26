@@ -484,8 +484,44 @@ export default function Index() {
             </p>
           </div>
 
+          {/* Карта для оплаты */}
+          {(selected || customPrice) && (
+            <div className="mb-5 rounded-2xl p-5" style={{ background: "rgba(240,192,96,0.07)", border: "1px solid rgba(240,192,96,0.2)" }}>
+              <p className="text-xs uppercase tracking-widest mb-3" style={{ color: "rgba(240,192,96,0.6)" }}>
+                Переведи оплату на карту
+              </p>
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div>
+                  <div className="font-mono text-lg font-semibold tracking-widest" style={{ color: "#f5ecd4" }}>
+                    2200 7021 3849 1381
+                  </div>
+                  <div className="text-xs mt-1" style={{ color: "rgba(160,150,200,0.6)" }}>Данил П.</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-semibold" style={{ color: "#f0c060" }}>
+                    {selected?.price ?? customPrice}₽
+                  </div>
+                  <div className="text-xs" style={{ color: "rgba(160,150,200,0.5)" }}>сумма к оплате</div>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText("2200702138491381");
+                }}
+                className="mt-3 flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg transition-all hover:opacity-80"
+                style={{ background: "rgba(240,192,96,0.15)", color: "rgba(240,192,96,0.9)" }}
+              >
+                <Icon name="Copy" size={13} />
+                Скопировать номер карты
+              </button>
+            </div>
+          )}
+
+          {/* Кнопка «Я оплатил» */}
           <a
-            href={telegramLink()}
+            href={`https://t.me/abmsks?text=${encodeURIComponent(
+              `✅ Оплатил!\n⭐️ Звёзды: ${selected?.stars ?? (parseInt(customStars) || "?")} шт.\n💰 Сумма: ${selected?.price ?? customPrice ?? "?"}₽\n👤 Юзернейм: @${username || "не указан"}`
+            )}`}
             target="_blank"
             rel="noreferrer"
             className={`flex items-center justify-center gap-2 w-full py-4 rounded-xl font-semibold text-sm transition-all ${
@@ -498,12 +534,12 @@ export default function Index() {
               color: "#0a0815",
             }}
           >
-            <Icon name="Send" size={16} />
-            Написать @abmsks в Telegram
+            <Icon name="CheckCircle" size={16} />
+            Я оплатил — уведомить продавца
           </a>
 
           <p className="text-center text-xs mt-3" style={{ color: "rgba(160,150,200,0.4)" }}>
-            После нажатия откроется Telegram с готовым сообщением
+            После нажатия откроется Telegram с сообщением об оплате
           </p>
         </div>
       </section>
